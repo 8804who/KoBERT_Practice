@@ -139,3 +139,10 @@ for e in range(num_epochs):
         out = model(token_ids, valid_length, segment_ids)
         test_acc += calc_accuracy(out, label)
     print("epoch {} validation acc {}".format(e+1, test_acc / (batch_id+1)))
+
+torch.save(model, 'C:/projects/NLP/KoBERT/1차 모델.pt')  # 전체 모델 저장
+torch.save(model.state_dict(), 'C:/projects/NLP/KoBERT/1차 모델_state_dict.pt')  # 모델 객체의 state_dict 저장
+torch.save({
+    'model': model.state_dict(),
+    'optimizer': optimizer.state_dict()
+}, 'C:/projects/NLP/KoBERT/all.tar')
