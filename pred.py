@@ -1,11 +1,8 @@
 import torch
 from torch import nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import gluonnlp as nlp
 import numpy as np
-from tqdm import tqdm, tqdm_notebook
 from kobert.utils import get_tokenizer
 from kobert.pytorch_kobert import get_pytorch_kobert_model
 import pandas as pd
@@ -66,7 +63,7 @@ class BERTClassifier(nn.Module):  ## 클래스를 상속
 max_len = 128
 batch_size = 32
 warmup_ratio = 0.1
-num_epochs = 20
+num_epochs = 5
 max_grad_norm = 1
 log_interval = 100
 learning_rate = 5e-5
@@ -97,4 +94,6 @@ def predict(sentence):
 
 
 songs = pd.read_csv('C:/projects/NLP/KoBERT/노래 가사/song2022.csv')
-print(song)
+
+
+print(songs['song_name'][0], songs['artist'][0], predict(songs['lyric'][0]))
