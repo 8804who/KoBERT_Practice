@@ -68,8 +68,8 @@ max_grad_norm = 1
 log_interval = 100
 learning_rate = 5e-5
 
-model = torch.load('C:/projects/NLP/KoBERT/1차 모델.pt')
-model.load_state_dict(torch.load('C:/projects/NLP/KoBERT/1차 모델_state_dict.pt'))
+model = torch.load('C:/projects/NLP/KoBERT/Model/model1.pt')
+model.load_state_dict(torch.load('C:/projects/NLP/KoBERT/Model/model1_state_dict.pt'))
 
 tokenizer = get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
@@ -94,6 +94,5 @@ def predict(sentence):
 
 
 songs = pd.read_csv('C:/projects/NLP/KoBERT/노래 가사/song2022.csv')
-
 
 print(songs['song_name'][0], songs['artist'][0], predict(songs['lyric'][0]))
