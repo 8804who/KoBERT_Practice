@@ -81,13 +81,13 @@ tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 def predict(sentence):
     dataset = [[sentence, '0']]
     test = BERTDataset(dataset, 0, 1, tok, vocab, max_len, True, False)
-    test_dataloader = torch.utils.data.DataLoader(test, batch_size=batch_size, num_workers=2)
+    test_dataloader = torch.utils.data.DataLoader(test, batch_size=batch_size, num_workers=4)
     model.eval()
     answer = 0
     for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
         token_ids = token_ids.long().to(device)
         segment_ids = segment_ids.long().to(device)
-        valid_length= valid_length
+        valid_length = valid_length
         label = label.long().to(device)
         out = model(token_ids, valid_length, segment_ids)
         for logits in out:
