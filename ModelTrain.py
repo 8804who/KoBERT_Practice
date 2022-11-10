@@ -40,7 +40,7 @@ class BERTDataset(Dataset):
 max_len = 128
 batch_size = 32
 warmup_ratio = 0.1
-num_epochs = 5
+num_epochs = 10
 max_grad_norm = 1
 log_interval = 200
 learning_rate = 5e-5
@@ -134,15 +134,15 @@ for e in range(num_epochs):
     for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(tqdm_notebook(test_dataloader)):
         token_ids = token_ids.long().to(device)
         segment_ids = segment_ids.long().to(device)
-        valid_length= valid_length
+        valid_length = valid_length
         label = label.long().to(device)
         out = model(token_ids, valid_length, segment_ids)
         test_acc += calc_accuracy(out, label)
     print("epoch {} validation acc {}".format(e+1, test_acc / (batch_id+1)))
 
-torch.save(model, 'C:/projects/NLP/KoBERT/1차 모델.pt')  # 전체 모델 저장
-torch.save(model.state_dict(), 'C:/projects/NLP/KoBERT/1차 모델_state_dict.pt')  # 모델 객체의 state_dict 저장
+torch.save(model, 'C:/projects/NLP/KoBERT/Model/model1.pt')  # 전체 모델 저장
+torch.save(model.state_dict(), 'C:/projects/NLP/KoBERT/Model/model1_state_dict.pt')  # 모델 객체의 state_dict 저장
 torch.save({
     'model': model.state_dict(),
     'optimizer': optimizer.state_dict()
-}, 'C:/projects/NLP/KoBERT/all.tar')
+}, 'C:/projects/NLP/KoBERT/Model/model1_all.tar')
